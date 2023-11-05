@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 
 public class ManagerScore : MonoBehaviour
 {
-    private static Text score = EndMenu.textScore;
+    private static Text score /*= EndMenu.textScore*/;
     //[SerializeField] private int hitCount = 0;
 
     void Start() // 13

@@ -23,10 +23,11 @@ public class HighScore : MonoBehaviour
     //}
     private void Start()
     {
+
         //goldCup = Resources.Load<Sprite>("Cup");
         //silverCup = Resources.Load<Sprite>("Cup/Cup_1");
         //bronzeCup = Resources.Load<Sprite>("Cup");
-        Debug.Log("Create List at Awake ");
+        Debug.Log("This is my game path: " + Application.persistentDataPath);
         entryContainer = transform.Find("HighScoreContainer");
         //entryTemplate = entryContainer.Find("HighScoreTemplate");
 
@@ -103,7 +104,8 @@ public class HighScore : MonoBehaviour
     }
     private IDbConnection CreateAndOpenDatabase()
     {
-        string dbUri = "URI=file:MyDatabase.sqlite"; // 4
+        string applicationdatapath = Application.persistentDataPath;
+        string dbUri = "URI=file:" + applicationdatapath + "/MyDatabase.sqlite"; // 4
         IDbConnection dbConnection = new SqliteConnection(dbUri); // 5
         dbConnection.Open();
 

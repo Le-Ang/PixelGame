@@ -25,7 +25,7 @@ public class ItemCollector : MonoBehaviour
             ClassScore.getInstance().scoreIncrease(1);
             Debug.Log("score   :  " + ClassScore.getInstance().getScore());
             cherriesText.text = "Cherries: " + ClassScore.getInstance().getScore();
-
+            Debug.Log("This is my game path: " + Application.persistentDataPath);
         }    
     }
 }

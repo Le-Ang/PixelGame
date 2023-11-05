@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private float dirX = 0f;
     private float moveSpeed = 3f;
     [SerializeField] private float jumpForce = 14f;
-    public Joystick joystick;
+    //public Joystick joystick;
     private bool moveLeft;
     private bool moveRight;
 

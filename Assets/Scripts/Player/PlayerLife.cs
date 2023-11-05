@@ -8,7 +8,7 @@ public class PlayerLife : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator anim;
-    private int currentHealth = 100;
+    public static int currentHealth = 100;
     public HealthBar healthBar;
     private int playerBlood = 100;
     private float bounce = 3f;

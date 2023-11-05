@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class EndMenu : MonoBehaviour
 {
-    [SerializeField] public static Text textScore;
-
+    public Text textScore;  
     private void Start()
     {
         textScore.text = ClassScore.getInstance().getScore().ToString();

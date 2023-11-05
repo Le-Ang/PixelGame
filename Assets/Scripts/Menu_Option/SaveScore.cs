@@ -27,6 +27,7 @@ public class SaveScore : MonoBehaviour
     //}
     public void SaveNameAndScore()
     {
+        Debug.Log(Application.persistentDataPath);
         HighScore findList = gameObject.GetComponent<HighScore>();
         IDbConnection dbConnection = CreateAndOpenDatabase();
         IDbCommand dbCommand= dbConnection.CreateCommand();
@@ -42,7 +43,7 @@ public class SaveScore : MonoBehaviour
         //    }
         //    else
         //    {
-                score =100/*ClassScore.getInstance().getScore()*/;
+                score = ClassScore.getInstance().getScore();
                 string sql = "INSERT OR REPLACE INTO Leaderboard (name, score) VALUES (\""+namePlayer.text + "\", " + score + ");";//xu ly chung ten
                 dbCommand.CommandText = sql;
                 Debug.Log(sql);
@@ -88,7 +89,8 @@ public class SaveScore : MonoBehaviour
     }
     private IDbConnection CreateAndOpenDatabase()
     {
-        string dbUri = "URI=file:MyDatabase.sqlite"; // 4
+        string applicationdatapath = Application.persistentDataPath;
+        string dbUri = "URI=file:"+applicationdatapath+"/MyDatabase.sqlite"; // 4
         IDbConnection dbConnection = new SqliteConnection(dbUri); // 5
         dbConnection.Open();
 

@@ -8,9 +8,9 @@ public class PlayerLife : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator anim;
-    public static int currentHealth = 100;
+    public float currentHealth = 100;
     public HealthBar healthBar;
-    private int playerBlood = 100;
+    private float playerBlood = 100;
     private float bounce = 3f;
 
     //[SerializeField] private AudioSource deathSoundEffect;
@@ -24,11 +24,7 @@ public class PlayerLife : MonoBehaviour
 
     private void Update()
     {
-        if (currentHealth == 0)
-        {
-            Die();            
-            RestartLevel();
-        }
+
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -36,18 +32,42 @@ public class PlayerLife : MonoBehaviour
         Debug.Log(tagofthis);
         if (collision.gameObject.CompareTag("Trap"))
         {
-            TakeDamage(25);
-            Bounce(); 
+            if (currentHealth <= 0)
+            {
+                anim.SetTrigger("death");
+                Die();
+            }
+            else
+            {
+                TakeDamage(25);
+                Bounce();
+            }            
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            TakeDamage(25);
-            Bounce();
+            if (currentHealth <= 0)
+            {
+                anim.SetTrigger("death");
+                Die();
+            }
+            else
+            {
+                TakeDamage(25);
+                Bounce();
+            }
         }
         if (collision.gameObject.CompareTag("BulletGhost"))
         {
-            TakeDamage(25);
-            Bounce();
+            if (currentHealth <= 0)
+            {
+                anim.SetTrigger("death");
+                Die();
+            }
+            else
+            {
+                TakeDamage(25);
+                Bounce();
+            }
         }
         
         //Debug.Log(collision.GetType().ToString());
@@ -66,19 +86,20 @@ public class PlayerLife : MonoBehaviour
     //        Die();
     //    }
     //}
+
     public void Die()
     {
         GameObject.FindGameObjectWithTag("SoundManager").
                 GetComponent<SoundManager>().PlaySoundEffect(MusicEffect.DIE);
         rb.bodyType = RigidbodyType2D.Static;
-        anim.SetTrigger("death");
+        
         ClassScore.getInstance().setScore(0);
     }
     private void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-    private void TakeDamage(int damage)
+    private void TakeDamage(float damage)
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
